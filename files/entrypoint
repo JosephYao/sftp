@@ -71,10 +71,18 @@ if [ ! -f "$userConfFinalPath" ]; then
     if [ ! -f /etc/ssh/ssh_host_rsa_key ]; then
         ssh-keygen -t rsa -b 4096 -f /etc/ssh/ssh_host_rsa_key -N ''
     fi
+    if [ ! -f /etc/ssh/ssh_host_dsa_key ]; then
+        ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key -N ''
+    fi
+    if [ ! -f /etc/ssh/ssh_host_ecdsa_key ]; then
+        ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N ''
+    fi
 
     # Restrict access from other users
     chmod 600 /etc/ssh/ssh_host_ed25519_key || true
     chmod 600 /etc/ssh/ssh_host_rsa_key || true
+    chmod 600 /etc/ssh/ssh_host_dsa_key || true
+    chmod 600 /etc/ssh/ssh_host_ecdsa_key || true
 fi
 
 # Source custom scripts, if any
